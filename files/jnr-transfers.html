@@ -18,7 +18,7 @@
     googleMapsLoaded = true;
     const script = document.createElement('script');
     // Replace YOUR_API_KEY below with your actual key
-    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCcjTWwaZP_h7-3EQBeTCmscxw8022kd3w&libraries=places&callback=initAutocomplete';
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initAutocomplete';
     script.async = true;
     script.defer = true;
     document.head.appendChild(script);
@@ -205,24 +205,6 @@
     transition: all 0.3s;
   }
 
-  .lang-toggle {
-    background: transparent;
-    border: 1px solid var(--border-gold);
-    color: var(--text-gold);
-    padding: 8px 14px;
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    cursor: pointer;
-    border-radius: 2px;
-    transition: all 0.3s var(--spring);
-    margin-left: 12px;
-  }
-  .lang-toggle:hover {
-    background: rgba(184,134,11,0.15);
-  }
-
   /* ── HERO ── */
   .hero {
     position: relative;
@@ -371,7 +353,7 @@
   }
   .stat-item:last-child { border-right: none; }
   .stat-number {
-    font-family: var(--font-body);
+    font-family: var(--font-display);
     font-size: 2rem;
     font-weight: 600;
     color: var(--text-gold);
@@ -658,8 +640,8 @@
   }
 
   .checkbox-group {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 12px;
   }
   .checkbox-item {
@@ -669,9 +651,11 @@
     background: rgba(255,255,255,0.03);
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 3px;
-    padding: 14px 18px;
+    padding: 12px 18px;
     cursor: pointer;
     transition: all 0.3s;
+    flex: 1;
+    min-width: 140px;
   }
   .checkbox-item:hover, .checkbox-item.checked {
     border-color: var(--border-gold);
@@ -778,9 +762,9 @@
   /* ── FLEET SECTION ── */
   .fleet-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 24px;
-    max-width: 900px;
+    max-width: 1100px;
     margin: 0 auto;
   }
   .fleet-card {
@@ -791,36 +775,25 @@
     overflow: hidden;
     transition: all 0.5s var(--spring);
     position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
   }
   .fleet-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-8px);
     border-color: var(--border-gold);
-    box-shadow: 0 24px 64px rgba(0,0,0,0.4), 0 0 60px rgba(184,134,11,0.06);
+    box-shadow: 0 24px 64px rgba(0,0,0,0.4);
   }
   .fleet-img {
-    min-height: 280px;
-    background: linear-gradient(135deg, rgba(184,134,11,0.06), rgba(10,10,10,0.9));
+    height: 200px;
+    background: linear-gradient(135deg, rgba(184,134,11,0.08), rgba(184,134,11,0.02));
     display: flex;
     align-items: center;
     justify-content: center;
-    border-right: 1px solid var(--border-subtle);
+    font-size: 3.5rem;
+    border-bottom: 1px solid var(--border-subtle);
   }
-  .fleet-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .fleet-info {
-    padding: 40px 36px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+  .fleet-info { padding: 28px; }
   .fleet-info h3 {
     font-family: var(--font-display);
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     font-weight: 500;
     margin-bottom: 6px;
   }
@@ -829,101 +802,18 @@
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--text-gold);
-    margin-bottom: 20px;
-  }
-  .fleet-desc {
-    color: var(--text-secondary);
-    font-size: 0.88rem;
-    line-height: 1.7;
-    font-weight: 300;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
   .fleet-specs {
     display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
+    gap: 20px;
     font-size: 0.8rem;
     color: var(--text-secondary);
   }
   .fleet-spec {
     display: flex;
     align-items: center;
-    gap: 8px;
-  }
-  .fleet-spec svg {
-    width: 16px;
-    height: 16px;
-    stroke: var(--gold-400);
-    fill: none;
-    stroke-width: 1.5;
-  }
-  @media (max-width: 768px) {
-    .fleet-card { grid-template-columns: 1fr; }
-    .fleet-img { min-height: 220px; border-right: none; border-bottom: 1px solid var(--border-subtle); }
-  }
-
-  /* ── CONTACT GRID ── */
-  .contact-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  .contact-card {
-    background: var(--surface-glass);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--border-subtle);
-    border-radius: 4px;
-    padding: 40px 28px;
-    text-align: center;
-    transition: all 0.5s var(--spring);
-    position: relative;
-    overflow: hidden;
-  }
-  .contact-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold-500), transparent);
-    opacity: 0;
-    transition: opacity 0.4s;
-  }
-  .contact-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--border-gold);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(184,134,11,0.05);
-  }
-  .contact-card:hover::before { opacity: 1; }
-  .contact-card-icon {
-    width: 56px; height: 56px;
-    border: 1px solid var(--border-gold);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px;
-    font-size: 1.4rem;
-    color: var(--gold-400);
-  }
-  .contact-card h3 {
-    font-family: var(--font-display);
-    font-size: 1.3rem;
-    font-weight: 500;
-    margin-bottom: 12px;
-  }
-  .contact-card a {
-    color: var(--text-gold);
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: color 0.3s;
-  }
-  .contact-card a:hover {
-    color: var(--gold-300);
-  }
-  @media (max-width: 768px) {
-    .contact-grid { grid-template-columns: 1fr; max-width: 400px; }
+    gap: 6px;
   }
 
   /* ── FOOTER ── */
@@ -1146,7 +1036,6 @@
     <li><a href="#fleet">Fleet</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <button class="lang-toggle" id="langToggle" onclick="toggleLanguage()" title="Cambiar idioma">ES</button>
   <button class="nav-cta" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Reserve Now</button>
   <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('open')">
     <span></span><span></span><span></span>
@@ -1186,8 +1075,8 @@
     <div class="stat-label">Availability</div>
   </div>
   <div class="stat-item">
-    <div class="stat-number">3</div>
-    <div class="stat-label">Available Drivers</div>
+    <div class="stat-number">15+</div>
+    <div class="stat-label">Premium Vehicles</div>
   </div>
 </div>
 
@@ -1258,6 +1147,7 @@
           <label>Pickup Address <span class="required">*</span></label>
           <div class="address-wrapper">
             <input class="form-input address-autocomplete" id="pickupAddress" type="text" placeholder="e.g. Málaga Airport (AGP), hotel name, or full address" required onfocus="loadGoogleMaps()">
+            <button type="button" class="manual-toggle" onclick="toggleManual(this)">Manual</button>
           </div>
         </div>
       </div>
@@ -1266,6 +1156,7 @@
           <label>Drop-off Address <span class="required">*</span></label>
           <div class="address-wrapper">
             <input class="form-input address-autocomplete" id="dropoffAddress" type="text" placeholder="e.g. Hotel, resort, private address" required onfocus="loadGoogleMaps()">
+            <button type="button" class="manual-toggle" onclick="toggleManual(this)">Manual</button>
           </div>
         </div>
       </div>
@@ -1276,6 +1167,7 @@
           <label>Return Pickup Address</label>
           <div class="address-wrapper">
             <input class="form-input address-autocomplete" id="returnAddress" type="text" placeholder="Return pickup address" onfocus="loadGoogleMaps()">
+            <button type="button" class="manual-toggle" onclick="toggleManual(this)">Manual</button>
           </div>
         </div>
       </div>
@@ -1328,9 +1220,14 @@
           <input class="form-input" type="text" id="flightNumber" placeholder="e.g. FR1234, AVE2045">
         </div>
         <div class="form-group">
-          <label>Vehicle Type</label>
-          <select class="form-input" id="vehicleType" disabled style="opacity:0.7;cursor:not-allowed;">
-            <option value="luxury-van" selected>Luxury Van — Mercedes V-Class</option>
+          <label>Vehicle Type <span class="required">*</span></label>
+          <select class="form-input" id="vehicleType" required>
+            <option value="">Select vehicle</option>
+            <option value="sedan">Sedan (1-3 passengers)</option>
+            <option value="executive">Executive Sedan (1-3 passengers)</option>
+            <option value="van">Minivan (4-6 passengers)</option>
+            <option value="luxury-van">Luxury Van (5-7 passengers)</option>
+            <option value="minibus">Minibus (8-16 passengers)</option>
           </select>
         </div>
       </div>
@@ -1369,7 +1266,7 @@
         </div>
       </div>
 
-      <div class="form-row full" style="margin-top:8px;">
+      <div class="form-row" style="margin-top:8px;">
         <div class="form-group">
           <label>Additional Items</label>
           <div class="checkbox-group" id="extraItems">
@@ -1389,6 +1286,16 @@
               <span class="checkbox-label">Golf Clubs</span>
             </label>
             <label class="checkbox-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="extras" value="ski">
+              <span class="checkbox-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>
+              <span class="checkbox-label">Ski Equipment</span>
+            </label>
+            <label class="checkbox-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="extras" value="surfboard">
+              <span class="checkbox-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>
+              <span class="checkbox-label">Surfboard</span>
+            </label>
+            <label class="checkbox-item" onclick="toggleCheck(this)">
               <input type="checkbox" name="extras" value="pet">
               <span class="checkbox-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>
               <span class="checkbox-label">Pet / Animal</span>
@@ -1399,14 +1306,20 @@
 
       <div class="form-row">
         <div class="form-group">
-          <label>Toddler Seat</label>
+          <label>Child Seats</label>
           <select class="form-input" id="childSeats">
-            <option value="no">No</option>
-            <option value="yes">Yes</option>
+            <option value="none">No child seat needed</option>
+            <option value="infant">Infant seat (0-12 months)</option>
+            <option value="toddler">Toddler seat (1-4 years)</option>
+            <option value="booster">Booster seat (4-12 years)</option>
+            <option value="infant+toddler">Infant + Toddler</option>
+            <option value="infant+booster">Infant + Booster</option>
+            <option value="toddler+booster">Toddler + Booster</option>
+            <option value="2toddler">2x Toddler seats</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Name Board <span style="color:var(--text-secondary);font-weight:300;text-transform:none;letter-spacing:0;">(Optional)</span></label>
+          <label>Name Board (Meet & Greet)</label>
           <input class="form-input" type="text" id="nameBoard" placeholder="Name to display on sign">
         </div>
       </div>
@@ -1465,17 +1378,41 @@
   </div>
   <div class="fleet-grid">
     <div class="fleet-card animate-on-scroll">
-      <div class="fleet-img"><img src="mercedes-vclass.png" alt="Mercedes V-Class Luxury Van"></div>
+      <div class="fleet-img">🚗</div>
+      <div class="fleet-info">
+        <h3>Executive Sedan</h3>
+        <div class="fleet-type">Mercedes E-Class / BMW 5 Series</div>
+        <div class="fleet-specs">
+          <span class="fleet-spec">👤 1-3</span>
+          <span class="fleet-spec">🧳 3</span>
+          <span class="fleet-spec">Wi-Fi</span>
+          <span class="fleet-spec">Leather</span>
+        </div>
+      </div>
+    </div>
+    <div class="fleet-card animate-on-scroll">
+      <div class="fleet-img">🚙</div>
       <div class="fleet-info">
         <h3>Luxury Van</h3>
         <div class="fleet-type">Mercedes V-Class</div>
-        <p class="fleet-desc">Premium comfort for up to 7 passengers. Spacious interior with leather seats, climate control, and complimentary amenities for an exceptional travel experience.</p>
         <div class="fleet-specs">
-          <span class="fleet-spec"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> 5-7 Pax</span>
-          <span class="fleet-spec"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg> 7 Cases</span>
-          <span class="fleet-spec"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1"/></svg> Wi-Fi</span>
-          <span class="fleet-spec"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Leather</span>
-          <span class="fleet-spec"><svg viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m-8-9H3m18 0h-1m-2.636-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707"/><circle cx="12" cy="12" r="4"/></svg> A/C</span>
+          <span class="fleet-spec">👤 5-7</span>
+          <span class="fleet-spec">🧳 7</span>
+          <span class="fleet-spec">Wi-Fi</span>
+          <span class="fleet-spec">Extra space</span>
+        </div>
+      </div>
+    </div>
+    <div class="fleet-card animate-on-scroll">
+      <div class="fleet-img">🚐</div>
+      <div class="fleet-info">
+        <h3>Minibus</h3>
+        <div class="fleet-type">Mercedes Sprinter</div>
+        <div class="fleet-specs">
+          <span class="fleet-spec">👤 8-16</span>
+          <span class="fleet-spec">🧳 16</span>
+          <span class="fleet-spec">A/C</span>
+          <span class="fleet-spec">Groups</span>
         </div>
       </div>
     </div>
@@ -1489,21 +1426,21 @@
     <h2 class="section-title">Get in Touch</h2>
     <p class="section-desc">Available 24/7 for your enquiries. We speak English, Spanish, and more.</p>
   </div>
-  <div class="contact-grid">
-    <div class="contact-card animate-on-scroll">
-      <div class="contact-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+  <div class="services-grid" style="max-width:800px;">
+    <div class="service-card animate-on-scroll" style="text-align:center;">
+      <div class="service-icon" style="margin:0 auto 24px;">📞</div>
       <h3>Call Us</h3>
-      <a href="tel:+34600000000">+34 600 000 000</a>
+      <p style="margin-top:8px;"><a href="tel:+34600000000" style="color:var(--text-gold);text-decoration:none;">+34 600 000 000</a></p>
     </div>
-    <div class="contact-card animate-on-scroll">
-      <div class="contact-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div>
+    <div class="service-card animate-on-scroll" style="text-align:center;">
+      <div class="service-icon" style="margin:0 auto 24px;">💬</div>
       <h3>WhatsApp</h3>
-      <a href="https://wa.me/34600000000">+34 600 000 000</a>
+      <p style="margin-top:8px;"><a href="https://wa.me/34600000000" style="color:var(--text-gold);text-decoration:none;">+34 600 000 000</a></p>
     </div>
-    <div class="contact-card animate-on-scroll">
-      <div class="contact-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+    <div class="service-card animate-on-scroll" style="text-align:center;">
+      <div class="service-icon" style="margin:0 auto 24px;">✉</div>
       <h3>Email</h3>
-      <a href="mailto:info@jnrtransfers.com">info@jnrtransfers.com</a>
+      <p style="margin-top:8px;"><a href="mailto:info@jnrtransfers.com" style="color:var(--text-gold);text-decoration:none;">info@jnrtransfers.com</a></p>
     </div>
   </div>
 </section>
@@ -1736,7 +1673,7 @@ function handleSubmit(e) {
     date: document.getElementById('pickupDate').value,
     time: document.getElementById('pickupTime').value,
     flight: document.getElementById('flightNumber').value,
-    vehicle: 'luxury-van',
+    vehicle: document.getElementById('vehicleType').value,
     passengers: document.getElementById('passengers').value,
     suitcases: document.getElementById('suitcases').value,
     handLuggage: document.getElementById('handluggage').value,
@@ -1776,312 +1713,6 @@ function handleSubmit(e) {
 
 // ── SET MIN DATE TO TODAY ──
 document.getElementById('pickupDate').min = new Date().toISOString().split('T')[0];
-
-// ── LANGUAGE SYSTEM ──
-let currentLang = 'en';
-
-const i18n = {
-  en: {
-    navServices: 'Services', navBook: 'Book Now', navFleet: 'Fleet', navContact: 'Contact', navCta: 'Reserve Now',
-    heroBadge: 'Private Luxury Transfer Service',
-    heroTitle: 'Your Journey, <br><span class="gold">Our Excellence</span>',
-    heroSub: 'Premium private transfers with professional chauffeurs. Airport pickups, VIP transport, and bespoke travel solutions across the Costa del Sol and beyond.',
-    heroPrimary: 'Book Your Transfer', heroSecondary: 'Our Services', scroll: 'Scroll',
-    statLabels: ['Transfers Completed', 'Client Rating', 'Availability', 'Available Drivers'],
-    svcLabel: 'Our Services', svcTitle: 'Tailored to Perfection',
-    svcDesc: 'Every journey is crafted around your needs \u2014 from airport arrivals to bespoke excursions.',
-    svcCards: [
-      { title: 'Airport Transfers', desc: 'Seamless pickup and drop-off at M\u00e1laga (AGP), Gibraltar, Sevilla, and all major airports. Flight tracking included.' },
-      { title: 'VIP & Corporate', desc: 'Executive travel for business professionals. Discreet, punctual, and tailored to corporate standards.' },
-      { title: 'Costa del Sol Tours', desc: 'Full-day excursions to Marbella, Ronda, Granada, and beyond. Custom itineraries available.' },
-      { title: 'Events & Weddings', desc: 'Luxury fleet for special occasions. Multi-vehicle coordination for groups and celebrations.' },
-      { title: 'Port & Cruise', desc: 'Transfers to and from M\u00e1laga port and cruise terminals. Perfectly timed to your schedule.' },
-      { title: 'Long Distance', desc: 'Inter-city transfers across Andaluc\u00eda and Spain. Madrid, Barcelona, and all major destinations.' }
-    ],
-    bkLabel: 'Book Your Transfer', bkTitle: 'Reserve in Minutes',
-    bkDesc: 'Complete the form below with your journey details and we\'ll confirm your booking within 30 minutes.',
-    bkHeader: 'Transfer Booking',
-    tabs: ['One Way', 'Round Trip', 'By the Hour'],
-    formSections: ['Route Details', 'Schedule', 'Passengers & Luggage', 'Your Details'],
-    lblPickup: 'Pickup Address', lblDropoff: 'Drop-off Address', lblReturn: 'Return Pickup Address',
-    lblDate: 'Pickup Date', lblTime: 'Pickup Time', lblReturnDate: 'Return Date', lblReturnTime: 'Return Time',
-    lblHours: 'Number of Hours', lblFlight: 'Flight / Train Number', lblVehicle: 'Vehicle Type',
-    lblPassengers: 'Passengers', lblSuitcases: 'Suitcases', lblHandLuggage: 'Hand Luggage',
-    lblExtras: 'Additional Items',
-    lblStroller: 'Stroller / Pushchair', lblWheelchair: 'Wheelchair', lblGolf: 'Golf Clubs', lblPet: 'Pet / Animal',
-    lblToddler: 'Toddler Seat', lblToddlerNo: 'No', lblToddlerYes: 'Yes',
-    lblNameBoard: 'Name Board', lblNameBoardOpt: '(Optional)',
-    lblName: 'Full Name', lblEmail: 'Email', lblPhone: 'Phone (with country code)',
-    lblPreferred: 'Preferred Contact',
-    contactOpts: ['WhatsApp', 'Phone Call', 'Email', 'SMS'],
-    lblNotes: 'Special Requests / Notes',
-    submitNote: 'We\'ll confirm your booking via your preferred contact method within 30 minutes. No payment required at this stage.',
-    submitBtn: 'Request Booking',
-    phPickup: 'e.g. M\u00e1laga Airport (AGP), hotel name, or full address',
-    phDropoff: 'e.g. Hotel, resort, private address', phReturn: 'Return pickup address',
-    phDuration: 'Select duration', phFlight: 'e.g. FR1234, AVE2045',
-    phName: 'John Smith', phEmail: 'john@email.com', phPhone: '+34 600 000 000',
-    phNotes: 'Water bottles, specific route preferences, mobility needs, multiple stops, etc.',
-    phNameBoard: 'Name to display on sign',
-    hours: ['2 hours', '3 hours', '4 hours', '6 hours', '8 hours (Full day)', '10 hours', '12 hours'],
-    vehicleOpt: 'Luxury Van \u2014 Mercedes V-Class',
-    flLabel: 'Our Fleet', flTitle: 'Premium Vehicles',
-    flDesc: 'Meticulously maintained, fully insured, and equipped for your comfort.',
-    flName: 'Luxury Van', flType: 'Mercedes V-Class',
-    flDetail: 'Premium comfort for up to 7 passengers. Spacious interior with leather seats, climate control, and complimentary amenities for an exceptional travel experience.',
-    flSpecs: ['5-7 Pax', '7 Cases', 'Wi-Fi', 'Leather', 'A/C'],
-    ctLabel: 'Contact', ctTitle: 'Get in Touch',
-    ctDesc: 'Available 24/7 for your enquiries. We speak English, Spanish, and more.',
-    ctCards: ['Call Us', 'WhatsApp', 'Email'],
-    ftBrand: 'Premium private transfer service on the Costa del Sol. Your comfort and safety, our priority.',
-    ftCols: ['Services', 'Company', 'Legal'],
-    ftServices: ['Airport Transfers', 'VIP & Corporate', 'Tours & Excursions', 'Events & Weddings'],
-    ftCompany: ['About Us', 'Our Fleet', 'Reviews', 'Careers'],
-    ftLegal: ['Privacy Policy', 'Terms & Conditions', 'Cookie Policy', 'GDPR'],
-    ftCopy: '\u00a9 2026 JNR Transfers. All rights reserved.',
-    ftLicense: 'Licensed & Insured Private Transport',
-    modalTitle: 'Booking Received',
-    modalDesc: 'Thank you for choosing JNR Transfers. We\'ll confirm your reservation within 30 minutes via your preferred contact method.',
-    modalClose: 'Close'
-  },
-  es: {
-    navServices: 'Servicios', navBook: 'Reservar', navFleet: 'Flota', navContact: 'Contacto', navCta: 'Reservar Ahora',
-    heroBadge: 'Servicio Privado de Transfer de Lujo',
-    heroTitle: 'Tu Viaje, <br><span class="gold">Nuestra Excelencia</span>',
-    heroSub: 'Transfers privados premium con ch\u00f3feres profesionales. Recogidas en aeropuerto, transporte VIP y soluciones de viaje personalizadas en la Costa del Sol y m\u00e1s all\u00e1.',
-    heroPrimary: 'Reserva Tu Transfer', heroSecondary: 'Nuestros Servicios', scroll: 'Desliza',
-    statLabels: ['Transfers Realizados', 'Valoraci\u00f3n de Clientes', 'Disponibilidad', 'Conductores Disponibles'],
-    svcLabel: 'Nuestros Servicios', svcTitle: 'Dise\u00f1ado a la Perfecci\u00f3n',
-    svcDesc: 'Cada viaje se adapta a tus necesidades \u2014 desde llegadas al aeropuerto hasta excursiones exclusivas.',
-    svcCards: [
-      { title: 'Transfers Aeropuerto', desc: 'Recogida y entrega sin interrupciones en M\u00e1laga (AGP), Gibraltar, Sevilla y todos los principales aeropuertos. Seguimiento de vuelos incluido.' },
-      { title: 'VIP y Corporativo', desc: 'Viajes ejecutivos para profesionales. Discreto, puntual y adaptado a est\u00e1ndares corporativos.' },
-      { title: 'Tours Costa del Sol', desc: 'Excursiones de d\u00eda completo a Marbella, Ronda, Granada y m\u00e1s. Itinerarios personalizados disponibles.' },
-      { title: 'Eventos y Bodas', desc: 'Flota de lujo para ocasiones especiales. Coordinaci\u00f3n de m\u00faltiples veh\u00edculos para grupos y celebraciones.' },
-      { title: 'Puerto y Cruceros', desc: 'Transfers hacia y desde el puerto de M\u00e1laga y terminales de cruceros. Perfectamente sincronizados con tu horario.' },
-      { title: 'Larga Distancia', desc: 'Transfers interurbanos por Andaluc\u00eda y Espa\u00f1a. Madrid, Barcelona y todos los destinos principales.' }
-    ],
-    bkLabel: 'Reserva Tu Transfer', bkTitle: 'Reserva en Minutos',
-    bkDesc: 'Completa el formulario con los detalles de tu viaje y confirmaremos tu reserva en 30 minutos.',
-    bkHeader: 'Reserva de Transfer',
-    tabs: ['Solo Ida', 'Ida y Vuelta', 'Por Horas'],
-    formSections: ['Detalles de Ruta', 'Horario', 'Pasajeros y Equipaje', 'Tus Datos'],
-    lblPickup: 'Direcci\u00f3n de Recogida', lblDropoff: 'Direcci\u00f3n de Destino', lblReturn: 'Direcci\u00f3n de Recogida de Vuelta',
-    lblDate: 'Fecha de Recogida', lblTime: 'Hora de Recogida', lblReturnDate: 'Fecha de Vuelta', lblReturnTime: 'Hora de Vuelta',
-    lblHours: 'N\u00famero de Horas', lblFlight: 'N\u00famero de Vuelo / Tren', lblVehicle: 'Tipo de Veh\u00edculo',
-    lblPassengers: 'Pasajeros', lblSuitcases: 'Maletas', lblHandLuggage: 'Equipaje de Mano',
-    lblExtras: 'Art\u00edculos Adicionales',
-    lblStroller: 'Cochecito / Silla de Paseo', lblWheelchair: 'Silla de Ruedas', lblGolf: 'Palos de Golf', lblPet: 'Mascota / Animal',
-    lblToddler: 'Silla Infantil', lblToddlerNo: 'No', lblToddlerYes: 'S\u00ed',
-    lblNameBoard: 'Cartel con Nombre', lblNameBoardOpt: '(Opcional)',
-    lblName: 'Nombre Completo', lblEmail: 'Correo Electr\u00f3nico', lblPhone: 'Tel\u00e9fono (con c\u00f3digo de pa\u00eds)',
-    lblPreferred: 'Contacto Preferido',
-    contactOpts: ['WhatsApp', 'Llamada', 'Email', 'SMS'],
-    lblNotes: 'Solicitudes Especiales / Notas',
-    submitNote: 'Confirmaremos tu reserva por tu m\u00e9todo de contacto preferido en 30 minutos. No se requiere pago en esta fase.',
-    submitBtn: 'Solicitar Reserva',
-    phPickup: 'Ej. Aeropuerto de M\u00e1laga (AGP), nombre del hotel o direcci\u00f3n completa',
-    phDropoff: 'Ej. Hotel, resort, direcci\u00f3n privada', phReturn: 'Direcci\u00f3n de recogida de vuelta',
-    phDuration: 'Seleccionar duraci\u00f3n', phFlight: 'Ej. FR1234, AVE2045',
-    phName: 'Juan Garc\u00eda', phEmail: 'juan@email.com', phPhone: '+34 600 000 000',
-    phNotes: 'Botellas de agua, preferencias de ruta, necesidades de movilidad, paradas m\u00faltiples, etc.',
-    phNameBoard: 'Nombre para mostrar en el cartel',
-    hours: ['2 horas', '3 horas', '4 horas', '6 horas', '8 horas (D\u00eda completo)', '10 horas', '12 horas'],
-    vehicleOpt: 'Furgoneta de Lujo \u2014 Mercedes V-Class',
-    flLabel: 'Nuestra Flota', flTitle: 'Veh\u00edculos Premium',
-    flDesc: 'Meticulosamente mantenidos, totalmente asegurados y equipados para tu confort.',
-    flName: 'Furgoneta de Lujo', flType: 'Mercedes V-Class',
-    flDetail: 'Confort premium para hasta 7 pasajeros. Interior espacioso con asientos de cuero, climatizaci\u00f3n y amenidades de cortes\u00eda para una experiencia de viaje excepcional.',
-    flSpecs: ['5-7 Pax', '7 Maletas', 'Wi-Fi', 'Cuero', 'A/A'],
-    ctLabel: 'Contacto', ctTitle: 'Contacta con Nosotros',
-    ctDesc: 'Disponible 24/7 para tus consultas. Hablamos ingl\u00e9s, espa\u00f1ol y m\u00e1s.',
-    ctCards: ['Ll\u00e1manos', 'WhatsApp', 'Email'],
-    ftBrand: 'Servicio de transfer privado premium en la Costa del Sol. Tu comodidad y seguridad, nuestra prioridad.',
-    ftCols: ['Servicios', 'Empresa', 'Legal'],
-    ftServices: ['Transfers Aeropuerto', 'VIP y Corporativo', 'Tours y Excursiones', 'Eventos y Bodas'],
-    ftCompany: ['Sobre Nosotros', 'Nuestra Flota', 'Rese\u00f1as', 'Empleo'],
-    ftLegal: ['Pol\u00edtica de Privacidad', 'T\u00e9rminos y Condiciones', 'Pol\u00edtica de Cookies', 'RGPD'],
-    ftCopy: '\u00a9 2026 JNR Transfers. Todos los derechos reservados.',
-    ftLicense: 'Transporte Privado Licenciado y Asegurado',
-    modalTitle: 'Reserva Recibida',
-    modalDesc: 'Gracias por elegir JNR Transfers. Confirmaremos tu reserva en 30 minutos a trav\u00e9s de tu m\u00e9todo de contacto preferido.',
-    modalClose: 'Cerrar'
-  }
-};
-
-function toggleLanguage() {
-  currentLang = currentLang === 'en' ? 'es' : 'en';
-  applyLanguage(currentLang);
-  document.getElementById('langToggle').textContent = currentLang === 'en' ? 'ES' : 'EN';
-  document.documentElement.lang = currentLang;
-}
-
-function applyLanguage(lang) {
-  const t = i18n[lang];
-
-  // Helper: set label by input ID
-  function setLabel(id, text, req) {
-    const input = document.getElementById(id);
-    if (!input) return;
-    const group = input.closest('.form-group');
-    if (!group) return;
-    const label = group.querySelector('label');
-    if (!label) return;
-    label.innerHTML = text + (req ? ' <span class="required">*</span>' : '');
-  }
-
-  // Nav
-  const navLinks = document.querySelectorAll('.nav-links a');
-  navLinks[0].textContent = t.navServices;
-  navLinks[1].textContent = t.navBook;
-  navLinks[2].textContent = t.navFleet;
-  navLinks[3].textContent = t.navContact;
-  document.querySelector('.nav-cta').textContent = t.navCta;
-
-  // Hero
-  document.querySelector('.hero-badge').innerHTML = '<span class="dot"></span> ' + t.heroBadge;
-  document.querySelector('.hero h1').innerHTML = t.heroTitle;
-  document.querySelector('.hero-sub').textContent = t.heroSub;
-  document.querySelector('.btn-primary').textContent = t.heroPrimary;
-  document.querySelector('.btn-secondary').textContent = t.heroSecondary;
-  document.querySelector('.hero-scroll span').textContent = t.scroll;
-
-  // Stats
-  document.querySelectorAll('.stat-label').forEach(function(el, i) { el.textContent = t.statLabels[i]; });
-
-  // Services
-  var svcSec = document.getElementById('services');
-  svcSec.querySelector('.section-label').textContent = t.svcLabel;
-  svcSec.querySelector('.section-title').textContent = t.svcTitle;
-  svcSec.querySelector('.section-desc').textContent = t.svcDesc;
-  svcSec.querySelectorAll('.service-card').forEach(function(card, i) {
-    if (t.svcCards[i]) {
-      card.querySelector('h3').textContent = t.svcCards[i].title;
-      card.querySelector('p').textContent = t.svcCards[i].desc;
-    }
-  });
-
-  // Booking section header
-  var bkSec = document.getElementById('booking');
-  bkSec.querySelector('.section-label').textContent = t.bkLabel;
-  bkSec.querySelector('.section-title').textContent = t.bkTitle;
-  bkSec.querySelector('.section-desc').textContent = t.bkDesc;
-  document.querySelector('.booking-header h2').textContent = t.bkHeader;
-
-  // Tabs
-  document.querySelectorAll('.booking-tab').forEach(function(tab, i) { tab.textContent = t.tabs[i]; });
-
-  // Form section titles
-  document.querySelectorAll('.form-section-title').forEach(function(el, i) { if (t.formSections[i]) el.textContent = t.formSections[i]; });
-
-  // Form labels
-  setLabel('pickupAddress', t.lblPickup, true);
-  setLabel('dropoffAddress', t.lblDropoff, true);
-  setLabel('returnAddress', t.lblReturn, false);
-  setLabel('pickupDate', t.lblDate, true);
-  setLabel('pickupTime', t.lblTime, true);
-  setLabel('returnDate', t.lblReturnDate, false);
-  setLabel('returnTime', t.lblReturnTime, false);
-  setLabel('hours', t.lblHours, false);
-  setLabel('flightNumber', t.lblFlight, false);
-  setLabel('vehicleType', t.lblVehicle, false);
-  setLabel('passengers', t.lblPassengers, true);
-  setLabel('suitcases', t.lblSuitcases, false);
-  setLabel('handluggage', t.lblHandLuggage, false);
-  setLabel('fullName', t.lblName, true);
-  setLabel('email', t.lblEmail, true);
-  setLabel('phone', t.lblPhone, true);
-  setLabel('contactMethod', t.lblPreferred, false);
-  setLabel('notes', t.lblNotes, false);
-
-  // Extras label
-  var extrasGroup = document.getElementById('extraItems').closest('.form-group');
-  if (extrasGroup) extrasGroup.querySelector('label').textContent = t.lblExtras;
-
-  // Checkbox labels
-  var checkLabels = document.querySelectorAll('#extraItems .checkbox-label');
-  var checkTexts = [t.lblStroller, t.lblWheelchair, t.lblGolf, t.lblPet];
-  checkLabels.forEach(function(el, i) { if (checkTexts[i]) el.textContent = checkTexts[i]; });
-
-  // Toddler seat
-  setLabel('childSeats', t.lblToddler, false);
-  var toddlerOpts = document.getElementById('childSeats').options;
-  toddlerOpts[0].textContent = t.lblToddlerNo;
-  toddlerOpts[1].textContent = t.lblToddlerYes;
-
-  // Name board
-  var nbInput = document.getElementById('nameBoard');
-  var nbGroup = nbInput.closest('.form-group');
-  nbGroup.querySelector('label').innerHTML = t.lblNameBoard + ' <span style="color:var(--text-secondary);font-weight:300;text-transform:none;letter-spacing:0;">' + t.lblNameBoardOpt + '</span>';
-
-  // Contact method options
-  var contactOpts = document.getElementById('contactMethod').options;
-  t.contactOpts.forEach(function(text, i) { if (contactOpts[i]) contactOpts[i].textContent = text; });
-
-  // Vehicle type option
-  document.getElementById('vehicleType').options[0].textContent = t.vehicleOpt;
-
-  // Submit
-  document.querySelector('.submit-note').textContent = t.submitNote;
-  document.querySelector('.submit-btn').textContent = t.submitBtn;
-
-  // Placeholders
-  document.getElementById('pickupAddress').placeholder = t.phPickup;
-  document.getElementById('dropoffAddress').placeholder = t.phDropoff;
-  document.getElementById('returnAddress').placeholder = t.phReturn;
-  document.getElementById('flightNumber').placeholder = t.phFlight;
-  document.getElementById('fullName').placeholder = t.phName;
-  document.getElementById('email').placeholder = t.phEmail;
-  document.getElementById('phone').placeholder = t.phPhone;
-  document.getElementById('notes').placeholder = t.phNotes;
-  document.getElementById('nameBoard').placeholder = t.phNameBoard;
-
-  // Hours select
-  var hoursSelect = document.getElementById('hours');
-  hoursSelect.options[0].textContent = t.phDuration;
-  t.hours.forEach(function(h, i) { if (hoursSelect.options[i + 1]) hoursSelect.options[i + 1].textContent = h; });
-
-  // Fleet
-  var flSec = document.getElementById('fleet');
-  flSec.querySelector('.section-label').textContent = t.flLabel;
-  flSec.querySelector('.section-title').textContent = t.flTitle;
-  flSec.querySelector('.section-desc').textContent = t.flDesc;
-  flSec.querySelector('.fleet-info h3').textContent = t.flName;
-  flSec.querySelector('.fleet-type').textContent = t.flType;
-  flSec.querySelector('.fleet-desc').textContent = t.flDetail;
-  flSec.querySelectorAll('.fleet-spec').forEach(function(spec, i) {
-    if (t.flSpecs[i]) {
-      var svg = spec.querySelector('svg');
-      spec.textContent = ' ' + t.flSpecs[i];
-      if (svg) spec.prepend(svg);
-    }
-  });
-
-  // Contact
-  var ctSec = document.getElementById('contact');
-  ctSec.querySelector('.section-label').textContent = t.ctLabel;
-  ctSec.querySelector('.section-title').textContent = t.ctTitle;
-  ctSec.querySelector('.section-desc').textContent = t.ctDesc;
-  ctSec.querySelectorAll('.contact-card h3').forEach(function(el, i) { el.textContent = t.ctCards[i]; });
-
-  // Footer
-  document.querySelector('.footer-brand p').textContent = t.ftBrand;
-  var footerCols = document.querySelectorAll('.footer-col');
-  footerCols.forEach(function(col, i) {
-    col.querySelector('h4').textContent = t.ftCols[i];
-    var links = col.querySelectorAll('a');
-    var texts = [t.ftServices, t.ftCompany, t.ftLegal][i];
-    links.forEach(function(link, j) { if (texts && texts[j]) link.textContent = texts[j]; });
-  });
-  var footerSpans = document.querySelectorAll('.footer-bottom span');
-  footerSpans[0].textContent = t.ftCopy;
-  footerSpans[1].textContent = t.ftLicense;
-
-  // Modal
-  document.querySelector('.modal-content h3').textContent = t.modalTitle;
-  document.querySelector('.modal-content p').textContent = t.modalDesc;
-  document.querySelector('.modal-close').textContent = t.modalClose;
-}
 </script>
 </body>
 </html>
