@@ -1105,11 +1105,73 @@
     }
   }
 
+  /* ── MOBILE MENU ── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(8,8,8,0.97);
+    backdrop-filter: blur(20px);
+    z-index: 999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .mobile-menu.active {
+    display: flex;
+    opacity: 1;
+  }
+  .mobile-menu a {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 20px 40px;
+    transition: color 0.3s;
+    letter-spacing: 0.04em;
+  }
+  .mobile-menu a:hover {
+    color: var(--text-gold);
+  }
+  .mobile-menu-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: none;
+    border: none;
+    color: var(--text-gold);
+    font-size: 2rem;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mobile-menu-cta {
+    margin-top: 20px;
+    padding: 14px 40px !important;
+    border: 1px solid var(--border-gold) !important;
+    color: var(--text-gold) !important;
+    font-family: var(--font-body) !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.15em !important;
+    text-transform: uppercase;
+  }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     nav { padding: 16px 20px; }
     .nav-links { display: none; }
     .nav-cta { display: none; }
+    .lang-toggle { margin-left: auto; margin-right: 12px; }
     .hamburger { display: flex; }
     .stats-bar { grid-template-columns: repeat(2, 1fr); margin: -20px 16px 0; }
     .stat-item:nth-child(2) { border-right: none; }
@@ -1126,6 +1188,7 @@
     .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
     .hero-ctas { flex-direction: column; align-items: center; }
     .fleet-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -1148,10 +1211,22 @@
   </ul>
   <button class="lang-toggle" id="langToggle" onclick="toggleLanguage()" title="Cambiar idioma">ES</button>
   <button class="nav-cta" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Reserve Now</button>
-  <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('open')">
+  <button class="hamburger" aria-label="Menu" onclick="document.getElementById('mobileMenu').classList.add('active')">
     <span></span><span></span><span></span>
   </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="document.getElementById('mobileMenu').classList.remove('active')">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+  </button>
+  <a href="#services" onclick="document.getElementById('mobileMenu').classList.remove('active')">Services</a>
+  <a href="#booking" onclick="document.getElementById('mobileMenu').classList.remove('active')">Book Now</a>
+  <a href="#fleet" onclick="document.getElementById('mobileMenu').classList.remove('active')">Fleet</a>
+  <a href="#contact" onclick="document.getElementById('mobileMenu').classList.remove('active')">Contact</a>
+  <a href="#booking" class="mobile-menu-cta" onclick="document.getElementById('mobileMenu').classList.remove('active')">Reserve Now</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -1200,32 +1275,32 @@
   </div>
   <div class="services-grid">
     <div class="service-card animate-on-scroll">
-      <div class="service-icon">✈</div>
+      <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16l6-6 4 4 8-8"/><path d="M17.5 2.5L22 2l-.5 4.5"/><path d="M22 16v4a2 2 0 01-2 2H4a2 2 0 01-2-2V8"/></svg></div>
       <h3>Airport Transfers</h3>
       <p>Seamless pickup and drop-off at Málaga (AGP), Gibraltar, Sevilla, and all major airports. Flight tracking included.</p>
     </div>
     <div class="service-card animate-on-scroll">
-      <div class="service-icon">⬥</div>
+      <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-3a2 2 0 01-2-2V2"/><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M12 18v-6"/><path d="M9 15l3-3 3 3"/></svg></div>
       <h3>VIP & Corporate</h3>
       <p>Executive travel for business professionals. Discreet, punctual, and tailored to corporate standards.</p>
     </div>
     <div class="service-card animate-on-scroll">
-      <div class="service-icon">☀</div>
+      <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2"/><path d="M12 21v2"/><path d="M4.22 4.22l1.42 1.42"/><path d="M18.36 18.36l1.42 1.42"/><path d="M1 12h2"/><path d="M21 12h2"/><path d="M4.22 19.78l1.42-1.42"/><path d="M18.36 5.64l1.42-1.42"/></svg></div>
       <h3>Costa del Sol Tours</h3>
       <p>Full-day excursions to Marbella, Ronda, Granada, and beyond. Custom itineraries available.</p>
     </div>
     <div class="service-card animate-on-scroll">
-      <div class="service-icon">◈</div>
+      <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M16 3.13a4 4 0 010 7.75"/><path d="M21 21v-2a4 4 0 00-3-3.87"/></svg></div>
       <h3>Events & Weddings</h3>
       <p>Luxury fleet for special occasions. Multi-vehicle coordination for groups and celebrations.</p>
     </div>
     <div class="service-card animate-on-scroll">
-      <div class="service-icon">🚢</div>
+      <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l2 4h14l2-4"/><path d="M21 17H3"/><path d="M5 13V7a2 2 0 012-2h10a2 2 0 012 2v6"/><circle cx="7" cy="10" r="1"/><circle cx="17" cy="10" r="1"/><path d="M12 5v4"/></svg></div>
       <h3>Port & Cruise</h3>
       <p>Transfers to and from Málaga port and cruise terminals. Perfectly timed to your schedule.</p>
     </div>
     <div class="service-card animate-on-scroll">
-      <div class="service-icon">↔</div>
+      <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/><path d="M15 18l6-6-6-6"/><path d="M3 12h12"/></svg></div>
       <h3>Long Distance</h3>
       <p>Inter-city transfers across Andalucía and Spain. Madrid, Barcelona, and all major destinations.</p>
     </div>
@@ -1937,6 +2012,14 @@ function applyLanguage(lang) {
   navLinks[2].textContent = t.navFleet;
   navLinks[3].textContent = t.navContact;
   document.querySelector('.nav-cta').textContent = t.navCta;
+
+  // Mobile menu
+  var mobileLinks = document.querySelectorAll('#mobileMenu a:not(.mobile-menu-cta)');
+  mobileLinks[0].textContent = t.navServices;
+  mobileLinks[1].textContent = t.navBook;
+  mobileLinks[2].textContent = t.navFleet;
+  mobileLinks[3].textContent = t.navContact;
+  document.querySelector('.mobile-menu-cta').textContent = t.navCta;
 
   // Hero
   document.querySelector('.hero-badge').innerHTML = '<span class="dot"></span> ' + t.heroBadge;
